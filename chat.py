@@ -6,6 +6,9 @@ import torch
 from model import NeuralNet
 from nltk_utils import bag_of_words, tokenize
 
+import pyttsx3
+import speech_recognition as sr
+
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 with open('intents.json', 'r') as json_data:
@@ -26,12 +29,19 @@ model.load_state_dict(model_state)
 model.eval()
 
 bot_name = "Sam"
-print("Let's chat! (type 'quit' to exit)")
-while True:
-    # sentence = "do you use credit cards?"
-    sentence = input("You: ")
-    if sentence == "quit":
-        break
+print("Speak out loud!")
+
+def STT_TTS():
+
+    r = sr.Recognizer()
+    
+    with sr.Microphone() as source:
+            r.adjust_for_ambient_noise(source)
+            audio = r.listen(source)
+            voice_data = r.recognize_google(audio)
+            sentence = voice_data
+
+    print(f'{user}: {sentence}')
 
     sentence = tokenize(sentence)
     X = bag_of_words(sentence, all_words)
@@ -48,6 +58,17 @@ while True:
     if prob.item() > 0.75:
         for intent in intents['intents']:
             if tag == intent["tag"]:
+                ResponseOutput = random.choice(intent['responses'])
                 print(f"{bot_name}: {random.choice(intent['responses'])}")
     else:
         print(f"{bot_name}: I do not understand...")
+
+UnknownValueError = sr.UnknownValueError()
+
+Continue = "Yes"
+
+while True:
+    try:
+        STT_TTS()
+    except:
+        UnknownValueError
