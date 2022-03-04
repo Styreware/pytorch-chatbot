@@ -1,3 +1,6 @@
+CREDIT - ORIGINAL IMPLEMENTATION BY THE INCREDIBLE - PYTHON ENGINEER. 
+
+
 # Implementation of a Contextual Chatbot in PyTorch.  
 Simple chatbot implementation with PyTorch. 
 
