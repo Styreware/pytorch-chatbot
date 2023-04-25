@@ -1,3 +1,6 @@
+NOT BUILT BY HUW PROSSER. CREDIT TO PYTHON ENGINEER - CHECK OUT HIS INCREDIBLE RESOURCES!
+
+
 # Implementation of a Contextual Chatbot in PyTorch.  
 Simple chatbot implementation with PyTorch. 
 
